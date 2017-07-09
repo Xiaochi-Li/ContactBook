@@ -13,8 +13,7 @@ class ListContacts extends Component{
 
   updateQuery = (queryString) =>{
     this.setState({
-      query: queryString.trim()
-      //to trim any extra white space of user input
+      query: queryString.trim()//to trim any extra white space of user input
     })
   }
 
