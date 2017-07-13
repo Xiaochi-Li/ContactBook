@@ -27,27 +27,34 @@ class App extends Component {
   ContactsAPI.remove(contact)
   }
 
-  navigateToCreate = () =>{
-    this.setState({
-      screen:'create'
+  createContact = (contact) => {
+    ContactsAPI.create(contact).then(contact => {
+      this.setState(state => ({
+        contacts: state.contacts.concat([ contact ])
+      }))
     })
   }
 
   render() {
-    const {screen, contacts} = this.state
+    const {contacts} = this.state
     return (
       <div className="app">
         <Route exact path="/" render={() =>(<ListContacts
           onDeleteContact={this.removeContact}
-          onNavigate={this.navigateToCreate}
           contacts = {contacts}/>
         )} />
 
-        <Route path="/create" render={() =>(
+        <Route path="/create" render={({history}) =>(
           <CreateContact
+            onCreateContact={(contact) => {
+              this.createContact(contact)
+              console.log(contact)
+              //push the / url to hisory object so it jump back to the main page
+              //after creating a new contact
+              history.push('/')
+            }}
           />
-          )}
-        />
+         )} />
       </div>
     );
   }

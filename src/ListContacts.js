@@ -29,7 +29,7 @@ class ListContacts extends Component{
 
   render(){
     //ES6 to destructure object
-    const { contacts, onDeleteContact, onNavigate } = this.props
+    const { contacts, onDeleteContact } = this.props
     const { query } = this.state
 
     let showingContacts
@@ -38,7 +38,7 @@ class ListContacts extends Component{
       //
       const match =  new RegExp(escapeRegExp(query), 'i')
       showingContacts =  contacts.filter((contact)=>(match.test(contact.name)))
-      console.log(showingContacts)
+      
     } else {
       showingContacts = contacts
     }
